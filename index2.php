@@ -7,7 +7,7 @@ while($entree = $dbl->read()) {
 }
 $dbl->close();
 $BASE = "../index.php";
-function list_dir($base, $cur, $level=0) {
+function list_dir($base, $pp, $niveau=0) {
   global $PHP_SELF, $BASE;
   if ($dir = opendir($base)) {
     while($entree = readdir($dir)) {
@@ -15,11 +15,11 @@ function list_dir($base, $cur, $level=0) {
       $file = $base."/".$entree;
       if(is_dir($file) && !in_array($entree, array(".",".."))) {
 
-        for($i=1; $i<=(4*$level); $i++) {
+        for($i=1; $i<=(4*$niveau); $i++) {
             echo "&nbsp;";
         }
        
-        if($file == $cur) {
+        if($file == $pp) {
           echo "<b>$entree</b><br />\n";
         } else {
           echo "<a href=\"$PHP_SELF?dir=".rawurlencode($file)."\">$entree</a><br />\n";
