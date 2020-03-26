@@ -29,5 +29,31 @@ function list_dir($base, $pp, $niveau=0) {
     }
     closedir($dir);
   }
+  function list_file($cur) {
+    if ($dir = opendir($cur)) {
+      
+      $tab_dir = array();
+      $tab_file = array();
+      
+      while($file = readdir($dir)) {
+        if(is_dir($cur."/".$file)) {
+            $tab_dir[] = $file;
+        } else {
+            $tab_file[] = $file;
+        }
+      }
+     
+      sort($tab_dir);
+      sort($tab_file);
+     
+      foreach($tab_dir as $elem) {
+        echo "<img src=\"dir-close.gif\" />&nbsp;".$elem."<br />\n";
+      }
+      foreach($tab_file as $elem) {
+        echo "<img src=\"file-none.gif\" />&nbsp;".$elem."<br />\n";
+      }
+      closedir($dir);
+    }
+  }
 }
 ?>
